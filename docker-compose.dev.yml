@@ -1,0 +1,12 @@
+services:
+  server:
+    image: minecraft-server:dev
+    container_name: minecraft-server-dev
+    ports: !override
+      - "19134:19132/udp"
+      - "19135:19133/udp"
+  webui:
+    image: minecraft-webui:dev
+    container_name: minecraft-webui-dev
+    ports: !override
+      - "8081:8080"

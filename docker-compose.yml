@@ -1,0 +1,34 @@
+services:
+  server:
+    build: ./server
+    user: "1001:1001"
+    image: minecraft-server:prod
+    container_name: minecraft-server
+    stop_grace_period: 2m
+    restart: unless-stopped
+    ports:
+      - "19132:19132/udp"
+      - "19133:19133/udp"
+    volumes:
+      - ./server/data:/minecraft
+  webui:
+    build: ./web
+    user: "1001:1001"
+    image: minecraft-webui:prod
+    group_add:
+      - "106"
+    container_name: minecraft-webui
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - BACKUP_DIR=/app/backups
+      - WORLD_DIR=/app/worlds
+      - CONTAINER_NAME=minecraft-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./scripts:/app/scripts:ro
+      - ./backups:/app/backups
+      - ./server/data/worlds:/app/worlds
+    restart: unless-stopped

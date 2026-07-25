@@ -1,0 +1,4 @@
+.env
+backups/
+server/data
+docker-compose.override.yml
