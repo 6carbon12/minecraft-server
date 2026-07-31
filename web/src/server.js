@@ -23,7 +23,6 @@ const fetchServerStatus = () => {
 export const getServerStatus = async (_, res) => {
   try {
     const serverStatus = await fetchServerStatus();
-    console.log(serverStatus);
     res.status(serverStatus.status).json({ status: serverStatus.message });
   } catch (error) {
     console.error("Critical routing error:", error);

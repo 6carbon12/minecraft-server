@@ -3,9 +3,9 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import { authenticateToken, login } from './src/auth.js';
 import { listBackups, createBackup, deleteBackup } from './src/backup.js';
-import { restore } from './src/restore.js';
+import { restore, getLatestRestore } from './src/restore.js';
 import { getServerStatus, startServer, stopServer, restartServer } from './src/server.js';
-import { runCommand, getLogs } from './src/minecraft.js';
+import { runCommand, getLogs, getWorldName } from './src/minecraft.js';
 import { __dirname, PORT } from './src/constants.js'
 
 const app = express();
@@ -26,11 +26,13 @@ app.post('/api/login', login);
 
 // BACKUP
 app.get('/api/backups', listBackups);
+app.get('/api/backups', listBackups);
 app.post('/api/backups', createBackup);
 app.delete('/api/backups/:name', deleteBackup);
 
 // RESTORE
 app.post('/api/restore', restore);
+app.get('/api/restore/latest', getLatestRestore);
 
 // SEVER MANAGEMENT
 app.get('/api/server/status', getServerStatus);
@@ -41,6 +43,7 @@ app.get('/api/server/restart', restartServer);
 // MINECRAFT
 app.post('/api/minecraft/command', runCommand);
 app.get('/api/minecraft/logs', getLogs);
+app.get('/api/minecraft/worldName', getWorldName);
 
 
 const HOST = '0.0.0.0';

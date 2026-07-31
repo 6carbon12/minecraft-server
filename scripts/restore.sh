@@ -72,4 +72,6 @@ tar -xzf "$RESTORE_FILE" -C "$WORLD_DIR"
 echo "Starting Docker container..."
 docker start "$CONTAINER_NAME"
 
+basename "$RESTORE_FILE" > .latest_restored
+
 echo "Restore complete successfully."

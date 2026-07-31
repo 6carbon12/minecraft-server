@@ -24,6 +24,7 @@ services:
       - .env
     environment:
       - BACKUP_DIR=/app/backups
+      - SCRIPT_DIR=/app/scripts
       - WORLD_DIR=/app/worlds
       - CONTAINER_NAME=minecraft-server
     volumes:
