@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import { authenticateToken, login } from './src/auth.js';
 import { listBackups, createBackup, deleteBackup } from './src/backup.js';
 import { restore } from './src/restore.js';
@@ -12,6 +13,7 @@ const app = express();
 // MIDDLEWARE
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
+app.use(cookieParser());
 app.use('/api/backups', authenticateToken);
 app.use('/api/restore', authenticateToken);
 app.use('/api/server/start', authenticateToken);
