@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Tokyo Night inspired theme variables */
+@theme {
+  --color-tokyo-bg: #1a1b26;
+  --color-tokyo-fg: #a9b1d6;
+  --color-tokyo-accent: #7aa2f7;
+  --color-tokyo-surface: #24283b;
+  --color-tokyo-border: #414868;
+  --color-tokyo-success: #9ece6a;
+  --color-tokyo-error: #f7768e;
+  --color-tokyo-warning: #e0af68;
+}
+
+body {
+  background-color: var(--color-tokyo-bg);
+  color: var(--color-tokyo-fg);
+}

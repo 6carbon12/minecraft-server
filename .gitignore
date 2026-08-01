@@ -2,3 +2,5 @@
 backups/
 server/data
 docker-compose.override.yml
+.latest_restored
+node_modules/

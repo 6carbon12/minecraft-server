@@ -27,8 +27,9 @@ export const getLatestRestore = async (_, res) => {
   try {
     const last_restore = path.join(SCRIPT_DIR, ".latest_restored");
     const lastRestoredFile = await fs.readFile(last_restore, 'utf8');
+    console.log(lastRestoredFile);
 
-    res.status(200).json({ lastRestoredFile: lastRestoredFile.split('/')[1] })
+    res.status(200).json({ lastRestoredFile: lastRestoredFile })
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Failed to get last restored file."});

@@ -30,8 +30,8 @@ app.post('/api/backups', createBackup);
 app.delete('/api/backups/:name', deleteBackup);
 
 // RESTORE
-app.get('/api/restore/:name', restore);
 app.get('/api/restore/latest', getLatestRestore);
+app.get('/api/restore/:name', restore);
 
 // SEVER MANAGEMENT
 app.get('/api/server/status', getServerStatus);

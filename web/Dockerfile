@@ -1,17 +1,37 @@
-FROM node:20-alpine
+# FRONTEND
+FROM node:20-alpine AS frontend-builder
+WORKDIR /build/frontend
 
-# Install Docker CLI and bash so your scripts can execute commands against the host's Minecraft container
+COPY frontend/package*.json ./
+RUN npm ci
+
+COPY frontend/ ./
+RUN npm run build
+
+# BACKEND
+FROM node:20-alpine AS backend-builder
+WORKDIR /build/backend
+
+COPY backend/package*.json ./
+
+# Install only production dependencies for a smaller footprint
+RUN npm ci
+
+# PRODUCTION
+FROM node:20-alpine
+WORKDIR /app
+
 RUN apk add --no-cache docker-cli bash
 
-# Nest the app to preserve the relative path logic used in server.js
 WORKDIR /app/web
 
-# Copy package definition and install production dependencies
-COPY package*.json ./
-RUN npm install --omit=dev
+COPY --from=backend-builder /build/backend/node_modules ./node_modules
+COPY backend/package*.json ./
 
-# Copy the Express backend and the public frontend directory
-COPY . .
+COPY backend/index.js ./
+COPY backend/src ./src
+
+COPY --from=frontend-builder /build/frontend/dist ./public
 
 EXPOSE 8080
 
