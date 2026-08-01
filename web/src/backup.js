@@ -4,7 +4,7 @@ import { execFile } from 'child_process';
 import * as utils from './utils.js';
 import {BACKUP_DIR, SCRIPT_DIR} from './constants.js';
 
-export const listBackups = async (req, res) => {
+export const listBackups = async (_, res) => {
   try {
     const files = await fs.readdir(BACKUP_DIR);
     const backupList = await Promise.all(
@@ -14,7 +14,11 @@ export const listBackups = async (req, res) => {
         return { name: file, sizeBytes: stats.size, createdAt: stats.birthtime || stats.mtime };
       })
     );
-    res.json(backupList);
+
+    const backupListSorted = backupList.toSorted((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    res.json( { backups: backupListSorted });
   } catch (error) {
     console.error('Failed to list backups:', error);
     res.status(500).json({ error: 'Unable to list backup files.' });
@@ -32,10 +36,11 @@ export const createBackup = async (req, res) => {
 
   execFile(scriptPath, args, (error, stdout, stderr) => {
     if (error) {
-      console.error('Backup creation error:', error.message);
+      console.error('Backup creation error:', error.message, stdout);
       return res.status(500).json({ error: 'Backup failed', details: stderr });
     }
-    res.json({ message: 'Backup created successfully.', output: stdout.trim() });
+    console.log(stdout.trim())
+    res.json({ message: 'Backup created successfully.' });
   });
 }
 
