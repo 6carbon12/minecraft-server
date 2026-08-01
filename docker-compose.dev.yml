@@ -11,6 +11,9 @@ services:
     ports: !override
       - "8081:8080"
     environment: !override
+      - BACKUP_DIR=/app/backups
+      - SCRIPT_DIR=/app/scripts
+      - WORLD_DIR=/app/worlds
       - CONTAINER_NAME=minecraft-server-dev
       - npm_config_cache=/tmp/.npm
     command: npx nodemon index.js

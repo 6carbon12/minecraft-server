@@ -3,6 +3,7 @@ set -euo pipefail
 
 COMPOSE_DIR="${COMPOSE_DIR:-$HOME/minecraft}"
 BACKUP_DIR="${BACKUP_DIR:-$COMPOSE_DIR/backups}"
+SCRIPT_DIR="${SCRIPT_DIR:-$COMPOSE_DIR/scripts}"
 WORLD_DIR="${WORLD_DIR:-$COMPOSE_DIR/server/data/worlds}"
 WORLD_NAME="main-world"
 CONTAINER_NAME="${CONTAINER_NAME:-minecraft-server}"
@@ -72,6 +73,7 @@ tar -xzf "$RESTORE_FILE" -C "$WORLD_DIR"
 echo "Starting Docker container..."
 docker start "$CONTAINER_NAME"
 
-basename "$RESTORE_FILE" > .latest_restored
+touch "${SCRIPT_DIR}/.latest_restored"
+basename "$RESTORE_FILE" > "${SCRIPT_DIR}/.latest_restored"
 
 echo "Restore complete successfully."
