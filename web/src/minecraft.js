@@ -2,6 +2,31 @@ import { SCRIPT_DIR, WORLD_DIR } from './constants.js';
 import { execFile } from 'child_process';
 import path from 'path';
 import fs from "fs/promises"
+import { promisify } from 'util';
+import { randomUUID } from 'crypto';
+
+const processLogs = (logs) => {
+  const lines = logs.split('\n');
+  const logRegex = /^\[(?<time>\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}:\d{3})\s+(?<level>[A-Z]+)\]\s+(?<message>.*)$/;
+
+  const processedLogs = lines.map((line) => {
+    const match = line.match(logRegex);
+    if (!match) return null;
+
+    const { time, level, message } = match.groups;
+
+    if (message === "") return null;
+
+    return {
+      id: randomUUID(),
+      time,
+      level,
+      message: message.trim(),
+    };
+  });
+
+  return processedLogs.filter(log => log !== null);
+}
 
 export const runCommand = (req, res) => {
   const { command } = req.body;
@@ -20,17 +45,22 @@ export const runCommand = (req, res) => {
   })
 };
 
-export const getLogs = (_, res) => {
+export const getLogs = async (req, res) => {
   const scriptPath = path.join(SCRIPT_DIR, 'serverctl.sh');
+  const execAsync = promisify(execFile);
 
-  execFile(scriptPath, ["logs"], (error, stdout, _) => {
-    if (error) {
-      console.error('Failed to get logs.', error);
-      return res.status(500).json({ error: 'Failed to get logs.', details: error });
-    }
+  try {
+    const { stdout } = await execAsync(scriptPath, ["logs"]);
+    const logs = stdout.trim();
 
-    res.json({ logs: stdout });
-  })
+    const processedLogs = processLogs(logs);
+
+    res.status(200).json({ logs: processedLogs });
+  } catch (error) {
+    console.error("Failed to execute log command: ", error);
+    res.status(500).json({ message: error.message })
+  }
+
 };
 
 export const getWorldName = async (_, res) => {
