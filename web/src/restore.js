@@ -5,7 +5,7 @@ import { BACKUP_DIR, SCRIPT_DIR } from './constants.js';
 import { execFile } from 'child_process';
 
 export const restore = (req, res) => {
-  const { name } = req.body;
+  const { name } = req.params;
   if (!name || !utils.isValidFilename(name)) {
     return res.status(400).json({ error: 'A valid backup filename is required.' });
   }

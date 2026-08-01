@@ -26,12 +26,11 @@ app.post('/api/login', login);
 
 // BACKUP
 app.get('/api/backups', listBackups);
-app.get('/api/backups', listBackups);
 app.post('/api/backups', createBackup);
 app.delete('/api/backups/:name', deleteBackup);
 
 // RESTORE
-app.post('/api/restore', restore);
+app.get('/api/restore/:name', restore);
 app.get('/api/restore/latest', getLatestRestore);
 
 // SEVER MANAGEMENT
