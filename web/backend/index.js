@@ -14,15 +14,16 @@ const app = express();
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api/backups', authenticateToken);
-app.use('/api/restore', authenticateToken);
-app.use('/api/server/start', authenticateToken);
-app.use('/api/server/stop', authenticateToken);
-app.use('/api/server/restart', authenticateToken);
-app.use('/api/minecraft/command', authenticateToken);
 
-// LOGIN
+/////////////
+// Routing //
+/////////////
+
+// PUBLIC
 app.post('/api/login', login);
+
+// AUTHENTICATED
+app.use('/api', authenticateToken);
 
 // BACKUP
 app.get('/api/backups', listBackups);
@@ -58,3 +59,10 @@ process.on('SIGTERM', () => {
   });
 });
 
+process.on('SIGINT', () => {
+  console.log('SIGINT received. Starting graceful shutdown...');
+  server.close(() => {
+    console.log('HTTP server closed.');
+    process.exit(0);
+  });
+});
