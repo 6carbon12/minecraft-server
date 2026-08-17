@@ -10,12 +10,12 @@ const fetchServerStatus = () => {
     execFile(scriptPath, args, (error, stdout, _) => {
       if (error) {
         console.error('Failed to get server status: ', error.message);
-        return resolve({ status: 500, message: "Failed to get server status." });
+        return resolve({ status: 500, error: "Failed to get server status." });
       }
 
       const outputTrimmed = stdout.trim();
-      const serverStatus = outputTrimmed === "true" ? "online" : "offline"; 
-      resolve({ status: 200, message: serverStatus });
+      const serverStatus = outputTrimmed === "true" ? "online" : "offline";
+      resolve({ status: 200, serverStatus: serverStatus });
     });
   });
 };
@@ -23,10 +23,10 @@ const fetchServerStatus = () => {
 export const getServerStatus = async (_, res) => {
   try {
     const serverStatus = await fetchServerStatus();
-    res.status(serverStatus.status).json({ status: serverStatus.message });
+    res.status(serverStatus.status).json(serverStatus.serverStatus);
   } catch (error) {
     console.error("Critical routing error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Failed to get server status." });
   }
 };
 

@@ -18,7 +18,7 @@ export const listBackups = async (_, res) => {
     const backupListSorted = backupList.toSorted((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
-    res.json( { backups: backupListSorted });
+    res.json(backupListSorted);
   } catch (error) {
     console.error('Failed to list backups:', error);
     res.status(500).json({ error: 'Unable to list backup files.' });

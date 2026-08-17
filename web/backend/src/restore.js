@@ -17,9 +17,9 @@ export const restore = (req, res) => {
   execFile(scriptPath, [backupFilePath], (error, stdout, stderr) => {
     if (error) {
       console.error('Restore error:', error.message);
-      return res.status(500).json({ error: 'Restore process failed', details: stderr });
+      return res.status(500).json({ error: "Restore error." });
     }
-    res.json({ message: `Restored server state using '${name}'.`, output: stdout.trim() });
+    res.json({ message: `Restored server state using '${name}'.` });
   });
 };
 
@@ -29,9 +29,9 @@ export const getLatestRestore = async (_, res) => {
     const lastRestoredFile = await fs.readFile(last_restore, 'utf8');
     console.log(lastRestoredFile);
 
-    res.status(200).json({ lastRestoredFile: lastRestoredFile })
+    res.status(200).json(lastRestoredFile )
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ message: "Failed to get last restored file."});
+    res.status(500).json({ error: "Failed to get last restored file."});
   }
 }

@@ -32,15 +32,12 @@ export const runCommand = (req, res) => {
   const { command } = req.body;
   const scriptPath = path.join(SCRIPT_DIR, 'send-command.sh');
   const args = [command];
-  console.log(command);
-  console.log(req.body);
 
   execFile(scriptPath, args, (error, stdout, _) => {
     if (error) {
       console.error('Failed to execute command:', command, '\nWith error', error);
       return res.status(500).json({ error: 'Failed to execute command.', details: error });
     }
-    console.log(stdout.trim());
     res.json({ output: stdout.trim() });
   })
 };
@@ -55,10 +52,10 @@ export const getLogs = async (req, res) => {
 
     const processedLogs = processLogs(logs);
 
-    res.status(200).json({ logs: processedLogs });
+    res.status(200).json( processedLogs );
   } catch (error) {
     console.error("Failed to execute log command: ", error);
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ error: error.message })
   }
 
 };
@@ -68,10 +65,10 @@ export const getWorldName = async (_, res) => {
 
   try {
     const worldName = await fs.readFile(levelnameFile, 'utf8');
-    return res.status(200).json({worldName})
+    return res.status(200).json(worldName)
   }
   catch (error) {
     console.error(error);
-    return res.status(500).json({ message: error })
+    return res.status(500).json({ error: error })
   }
 }
