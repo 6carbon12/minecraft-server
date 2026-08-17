@@ -38,7 +38,9 @@ export const runCommand = (req, res) => {
       console.error('Failed to execute command:', command, '\nWith error', error);
       return res.status(500).json({ error: 'Failed to execute command.', details: error });
     }
-    res.json({ output: stdout.trim() });
+    const output = stdout.trim();
+    const cleanedOutput = output.replace(/^\[.*?\]\s*/gm, '');
+    res.json({ output: cleanedOutput });
   })
 };
 
