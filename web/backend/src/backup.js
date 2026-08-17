@@ -39,7 +39,6 @@ export const createBackup = async (req, res) => {
       console.error('Backup creation error:', error.message, stdout);
       return res.status(500).json({ error: 'Backup failed', details: stderr });
     }
-    console.log(stdout.trim())
     res.json({ message: 'Backup created successfully.' });
   });
 }

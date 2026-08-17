@@ -39,7 +39,6 @@ export const startServer = async (_, res) => {
       console.error('Failed to start server: ', error.message);
       return res.status(500).json({ error: "Failed to start server.", details: error.message });
     }
-    console.log(stdout.trim());
     res.status(200).json({ message: "Server Started." });
   })
 };
@@ -53,7 +52,6 @@ export const stopServer = (_, res) => {
       console.error('Failed to stop server: ', error.message);
       return res.status(500).json({ error: "Failed to stop server.", details: error.message });
     }
-    console.log(stdout.trim());
     res.status(200).json({ message: "Server Stopped." });
   })
 };
@@ -67,7 +65,6 @@ export const restartServer = (_, res) => {
       console.error('Failed to restart server: ', error.message);
       return res.status(500).json({ error: "Failed to restart server.", details: error.message });
     }
-    console.log(stdout.trim());
     res.status(200).json({ message: "Server Restarted." });
   })
 };
