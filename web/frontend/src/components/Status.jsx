@@ -11,7 +11,7 @@ async function getServerStatus() {
   }
 
   const resJson = await res.json();
-  return resJson.status;
+  return resJson;
 }
 
 async function getLastRestored() {
@@ -22,7 +22,7 @@ async function getLastRestored() {
   }
 
   const resJson = await res.json();
-  return resJson.lastRestoredFile;
+  return resJson;
 }
 
 async function getWorldName() {
@@ -35,7 +35,7 @@ async function getWorldName() {
   }
 
   const resJson = await res.json();
-  return resJson.worldName ? resJson.worldName : "Atlantis";
+  return resJson;
 }
 
 export default function Status() {

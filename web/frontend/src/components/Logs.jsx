@@ -7,7 +7,7 @@ async function getLogs() {
   }
 
   const resJson = await res.json();
-  return resJson.logs;
+  return resJson;
 }
 
 export default function Logs() {
