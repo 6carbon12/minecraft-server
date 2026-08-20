@@ -4,10 +4,7 @@ import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import Overview from "./pages/Overview";
 import Backups from "./pages/Backups";
-
-const Admin = () => (
-  <h2 className="text-tokyo-fg text-2xl font-bold">Admin Terminal</h2>
-);
+import Admin from "./pages/Admin";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,7 +23,6 @@ export default function App() {
           element={<Layout onLogout={() => setIsAuthenticated(false)} />}
         >
           <Route index element={<Navigate to="/overview" replace />} />
-
           <Route path="overview" element={<Overview />} />
           <Route path="backups" element={<Backups />} />
           <Route path="admin" element={<Admin />} />
