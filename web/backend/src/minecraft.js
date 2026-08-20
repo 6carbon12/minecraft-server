@@ -28,6 +28,32 @@ const processLogs = (logs) => {
   return processedLogs.filter(log => log !== null);
 }
 
+const processCmdOutput = (logs) => {
+  const lines = logs.split('\n');
+  const formattingCodeRegex = /§[0-9a-fk-or]/gi;
+  const logRegex = /^(?:\[(?<time>\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}:\d{3})\s+(?<level>[A-Z]+)\]\s+)?(?<message>.*)$/;
+
+  const processedLogs = lines.map((line) => {
+    const match = line.match(logRegex);
+    if (!match) return null;
+
+    const { time, level, message } = match.groups;
+
+    if (message === "") return null;
+
+    const messageFormatted = message.replace(formattingCodeRegex, "");
+
+    return {
+      id: randomUUID(),
+      time,
+      level,
+      message: messageFormatted.trim(),
+    };
+  });
+
+  return processedLogs.filter(log => log !== null);
+}
+
 export const runCommand = (req, res) => {
   const { command } = req.body;
   const scriptPath = path.join(SCRIPT_DIR, 'send-command.sh');
@@ -39,8 +65,8 @@ export const runCommand = (req, res) => {
       return res.status(500).json({ error: 'Failed to execute command.', details: error });
     }
     const output = stdout.trim();
-    const cleanedOutput = output.replace(/^\[.*?\]\s*/gm, '');
-    res.json({ output: cleanedOutput });
+    const outputProcessed = processCmdOutput(output);
+    res.json(outputProcessed);
   })
 };
 
