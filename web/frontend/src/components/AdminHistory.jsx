@@ -16,8 +16,8 @@ export default function AdminHistory({loading, history, input, setInput, handleK
   }, [loading]);
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="bg-tokyo-surface border-tokyo-border w-full max-w-480 rounded-md border p-4">
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="bg-tokyo-surface border-tokyo-border w-full max-w-480 h-full overflow-y-scroll rounded-md border p-4">
         {history.map((item, idx) => {
           let textClasses = item.type == "input" ? "font-black" : "font-medium";
           textClasses += item.level == "ERROR" ? " text-tokyo-error" : "";

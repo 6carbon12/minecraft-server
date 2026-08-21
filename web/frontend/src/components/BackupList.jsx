@@ -23,7 +23,7 @@ function formatDate(date) {
 
 export default function BackupList({backupName, setBackupName, backups, createBackup, restoreBackup, deleteBackup}) {
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full h-full justify-center">
       <div className="flex w-full max-w-480 flex-col justify-center gap-2">
         <h1 className="text-tokyo-accent mb-4 text-3xl font-bold sm:hidden">
           Backups
@@ -43,7 +43,7 @@ export default function BackupList({backupName, setBackupName, backups, createBa
             Create Backup
           </button>
         </div>
-        <div className="bg-tokyo-surface border-tokyo-border h-256 w-full overflow-x-auto rounded-md border">
+        <div className="bg-tokyo-surface border-tokyo-border flex-1 min-h-0 w-full overflow-x-auto rounded-md border">
           <table className="w-full text-left">
             <thead className="border-tokyo-border bg-tokyo-bg/50 text-tokyo-fg/70 border-b uppercase">
               <tr>

@@ -31,9 +31,9 @@ export default function Logs() {
   };
 
   return (
-    <div className="border-tokyo-border bg-tokyo-surface flex h-full w-full max-w-480 flex-col overflow-hidden rounded-md border font-mono text-sm">
+    <div className="border-tokyo-border bg-tokyo-surface flex flex-1 w-full max-w-480 flex-col overflow-hidden rounded-md border font-mono text-sm">
       {/* Scrollable Log Container */}
-      <div className="text-tokyo-fg h-196 space-y-1 overflow-y-auto p-4">
+      <div className="text-tokyo-fg h-full space-y-1 overflow-y-auto p-4">
         {logs.toReversed().map((log) => {
           const dateStr = log.time.substring(0, 10);
           const timeStr = log.time.substring(11, 19);

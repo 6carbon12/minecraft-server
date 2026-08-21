@@ -22,7 +22,7 @@ export default function Layout({ onLogout }) {
     }`;
 
   return (
-    <div className="flex h-full flex-col bg-tokyo-bg">
+    <div className="flex flex-col h-svh bg-tokyo-bg">
       <nav className="border-b border-tokyo-border bg-tokyo-surface px-4 py-4 sm:px-8 transition-all flex items-center flex-col">
 
         <div className="flex items-center justify-between w-full max-w-480">
@@ -77,7 +77,7 @@ export default function Layout({ onLogout }) {
         )}
       </nav>
 
-      <main className="flex-1 p-4 sm:p-8 h-full">
+      <main className="flex-1 min-h-0 p-4 sm:p-8">
         <Outlet />
       </main>
     </div>
