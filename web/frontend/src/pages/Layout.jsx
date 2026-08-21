@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import hambuger from '../assets/hambuger.svg';
 import close from '../assets/close.svg';
+import mainLogo from '../assets/logo-main.png';
 
 export default function Layout({ onLogout }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,8 +31,8 @@ export default function Layout({ onLogout }) {
         <div className="flex items-center justify-between w-full max-w-480">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-tokyo-border bg-tokyo-bg font-bold text-tokyo-accent">
-              A
+            <div className="flex h-10 w-10 p-1 items-center justify-center rounded-lg font-bold text-tokyo-accent">
+    <img src={mainLogo} alt="A"/>
             </div>
             <span className="font-bold tracking-wide text-tokyo-fg">
               <p className='font-bold tracking-wide text-tokyo-fg hidden sm:block'>
