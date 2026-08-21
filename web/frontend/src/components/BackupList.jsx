@@ -28,9 +28,6 @@ export default function BackupList({backupName, setBackupName, backups, createBa
   return (
     <div className="flex w-full h-full justify-center">
       <div className="flex w-full max-w-480 flex-col justify-center gap-2">
-        <h1 className="text-tokyo-accent mb-4 text-3xl font-bold sm:hidden">
-          Backups
-        </h1>
         <div className="bg-tokyo-surface border-tokyo-border flex w-full gap-2 rounded-md border p-2">
           <input
             type="text"

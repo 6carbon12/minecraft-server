@@ -43,7 +43,7 @@ export default function Logs() {
               key={log.id}
               className="flex gap-1 rounded px-2 py-1 transition-colors"
             >
-              <span className="shrink-0 text-[#565f89]">
+              <span className="shrink-0 text-[#565f89] mr-1">
                 <span className="hidden sm:inline">{dateStr}</span>
                 <span className="sm:ml-2">{timeStr}</span>
                 <span className="hidden md:inline">{msStr}</span>

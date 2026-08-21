@@ -72,9 +72,6 @@ function Admin() {
 
   return (
     <>
-    <h1 className="text-tokyo-accent mb-4 text-3xl font-bold sm:hidden">
-      Admin Console
-    </h1>
     <AdminHistory history={history} loading={loading} input={input} setInput={setInput} handleKeyDown={handleKeyDown} />
     </>
   );

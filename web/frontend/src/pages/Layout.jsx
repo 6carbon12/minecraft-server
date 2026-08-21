@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import hambuger from '../assets/hambuger.svg';
 import close from '../assets/close.svg';
 
 export default function Layout({ onLogout }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const currectLocation = location.pathname;
 
   // Configuration array to prevent repeating <NavLink> code
   const navLinks = [
@@ -31,7 +33,14 @@ export default function Layout({ onLogout }) {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-tokyo-border bg-tokyo-bg font-bold text-tokyo-accent">
               A
             </div>
-            <span className="font-bold tracking-wide text-tokyo-fg">Atlantis Control</span>
+            <span className="font-bold tracking-wide text-tokyo-fg">
+              <p className='font-bold tracking-wide text-tokyo-fg hidden sm:block'>
+                Atlantis Control
+              </p>
+              <p className='font-bold tracking-wide text-tokyo-accent sm:hidden'>
+                {currectLocation.toUpperCase().replace("/", "")}
+              </p>
+            </span>
           </div>
 
           {/* Desktop Nav */}

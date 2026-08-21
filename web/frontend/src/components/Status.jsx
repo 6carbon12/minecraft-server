@@ -106,9 +106,9 @@ export default function Status() {
       break;
   }
   return (
-    <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row gap-1 items-center justify-between rounded-md border px-2 py-2 sm:px-6 sm:py-4">
-      <div className="flex-3/4 flex flex-row items-center gap-1">
-        <div className="flex-1 sm:flex-none flex items-center justify-center">
+    <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row items-center justify-between gap-1 rounded-md border px-2 py-2 sm:px-6 sm:py-4">
+      <div className="flex flex-3/4 flex-row items-center gap-1">
+        <div className="flex flex-1 items-center justify-center sm:flex-none">
           <img
             src={logo}
             alt="Minecraft Logo"
@@ -116,25 +116,57 @@ export default function Status() {
           />
         </div>
         <div className="flex-4 sm:flex-none">
-          <p className="text-xl font-bold">{worldName}</p>
-          <p className="text-tokyo-border text-sm text-wrap wrap-anywhere">
+          <p className="flex items-center gap-2 text-lg font-bold">
+            {worldName}{" "}
+            <div className="flex items-center">
+              <span
+                className={
+                  "animate-pulse " +
+                  (serverState === "online"
+                    ? "text-tokyo-success"
+                    : serverState === "offline"
+                      ? "text-tokyo-error"
+                      : "text-tokyo-fg")
+                }
+              >
+                &middot;
+              </span>{" "}
+              <span
+                className={
+                  "text-xs " +
+                  (serverState === "online"
+                    ? "text-tokyo-success"
+                    : serverState === "offline"
+                      ? "text-tokyo-error"
+                      : "text-tokyo-fg")
+                }
+              >
+                {serverState}
+              </span>
+            </div>
+          </p>
+          <p className="text-tokyo-border text-xs text-wrap wrap-anywhere">
             <span className="hidden sm:inline">Last Resored: </span>
             {lastRestoredBackup.replace(".tar.gz", "")}
           </p>
         </div>
       </div>
-      <div className="flex-1/4 sm:flex-none flex flex-row gap-2">
+      <div className="flex flex-1/4 flex-row items-end gap-2 sm:flex-none">
         <button
-          className={`bg-tokyo-accent rounded-md border p-2 ${powerButtonClasses}`}
+          className={`bg-tokyo-accent rounded-md border p-3 ${powerButtonClasses}`}
           onClick={toggleServer}
         >
-        <StartStopIcon height="24" width="24" fill={serverState == "online" ? "#57101D" : "#3F522A"} ></StartStopIcon>
+          <StartStopIcon
+            height="16"
+            width="16"
+            fill={serverState == "online" ? "#57101D" : "#3F522A"}
+          ></StartStopIcon>
         </button>
         <button
-          className="bg-tokyo-accent border-tokyo-border rounded-md border p-2"
+          className="bg-tokyo-accent border-tokyo-border rounded-md border p-3"
           onClick={restartServer}
         >
-        <RestartIcon height="24" width="24" ></RestartIcon>
+          <RestartIcon height="16" width="16"></RestartIcon>
         </button>
       </div>
     </div>
