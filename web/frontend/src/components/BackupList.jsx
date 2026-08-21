@@ -51,7 +51,7 @@ export default function BackupList({backupName, setBackupName, backups, createBa
             <thead className="border-tokyo-border bg-tokyo-bg/50 text-tokyo-fg/70 border-b uppercase">
               <tr>
                 <th className="px-6 py-4 font-medium">Name</th>
-                <th className="w-36 px-6 py-4 text-center font-medium">
+                <th className="hidden w-36 px-6 py-4 text-center font-medium md:table-caption">
                   Created At
                 </th>
                 <th className="hidden w-36 px-6 py-4 text-center font-medium md:table-caption">
@@ -71,7 +71,7 @@ export default function BackupList({backupName, setBackupName, backups, createBa
                         {backup.name}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-center">
+                    <td className="hidden px-6 py-4 text-center md:table-cell">
                       {formatDate(backup.createdAt)}
                     </td>
                     <td className="hidden h-full w-36 items-center px-6 py-4 text-center md:table-cell">

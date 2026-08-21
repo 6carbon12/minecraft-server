@@ -106,23 +106,24 @@ export default function Status() {
       break;
   }
   return (
-    <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row items-center justify-between rounded-md border px-6 py-4">
-      <div className="flex flex-row items-center gap-4">
-        <div>
+    <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row gap-1 items-center justify-between rounded-md border px-2 py-2 sm:px-6 sm:py-4">
+      <div className="flex-3/4 flex flex-row items-center gap-1">
+        <div className="flex-1 sm:flex-none flex items-center justify-center">
           <img
             src={logo}
             alt="Minecraft Logo"
-            className={`h-10 ${statusClasses}`}
+            className={`h-10 w-10 ${statusClasses}`}
           />
         </div>
-        <div>
+        <div className="flex-4 sm:flex-none">
           <p className="text-xl font-bold">{worldName}</p>
-          <p className="text-tokyo-border text-sm">
-            Last Restored: {lastRestoredBackup}
+          <p className="text-tokyo-border text-sm text-wrap wrap-anywhere">
+            <span className="hidden sm:inline">Last Resored: </span>
+            {lastRestoredBackup.replace(".tar.gz", "")}
           </p>
         </div>
       </div>
-      <div className="flex flex-row gap-2">
+      <div className="flex-1/4 sm:flex-none flex flex-row gap-2">
         <button
           className={`bg-tokyo-accent rounded-md border p-2 ${powerButtonClasses}`}
           onClick={toggleServer}

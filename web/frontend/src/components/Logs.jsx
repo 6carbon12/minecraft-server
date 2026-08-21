@@ -25,7 +25,7 @@ export default function Logs() {
 
   // Color mapping for different log severities
   const levelColors = {
-    INFO: "text-tokyo-success", // Green
+    INFO: "text-tokyo-fg", // Green
     WARN: "text-tokyo-warning", // Yellow
     ERROR: "text-tokyo-error", // Red
   };
@@ -33,7 +33,7 @@ export default function Logs() {
   return (
     <div className="border-tokyo-border bg-tokyo-surface flex flex-1 w-full max-w-480 flex-col overflow-hidden rounded-md border font-mono text-sm">
       {/* Scrollable Log Container */}
-      <div className="text-tokyo-fg h-full space-y-1 overflow-y-auto p-4">
+      <div className="text-tokyo-fg text-xs h-full space-y-1 overflow-y-auto p-2">
         {logs.toReversed().map((log) => {
           const dateStr = log.time.substring(0, 10);
           const timeStr = log.time.substring(11, 19);
@@ -41,19 +41,14 @@ export default function Logs() {
           return (
             <div
               key={log.id}
-              className="flex gap-3 rounded px-2 py-1 transition-colors"
+              className="flex gap-1 rounded px-2 py-1 transition-colors"
             >
               <span className="shrink-0 text-[#565f89]">
-              <span className="hidden sm:inline">{dateStr}</span>
-              <span className="sm:ml-2">{timeStr}</span>
-              <span className="hidden md:inline">{msStr}</span>
-            </span>
-              <span
-                className={`w-12 shrink-0 font-bold ${levelColors[log.level]}`}
-              >
-                {log.level}
+                <span className="hidden sm:inline">{dateStr}</span>
+                <span className="sm:ml-2">{timeStr}</span>
+                <span className="hidden md:inline">{msStr}</span>
               </span>
-              <span className="wrap-break-words">{log.message}</span>
+              <span className={"wrap-anywhere " + levelColors[log.level]}>{log.message}</span>
             </div>
           );
         })}
