@@ -106,16 +106,16 @@ export default function Status() {
       break;
   }
   return (
-    <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row items-center justify-between gap-1 rounded-md border px-2 py-2 sm:px-6 sm:py-4">
+    <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row items-center justify-between gap-1 rounded-md border px-2 py-2 sm:px-4 sm:py-3">
       <div className="flex flex-3/4 flex-row items-center gap-1">
-        <div className="flex flex-1 items-center justify-center sm:flex-none">
+        <div className="flex flex-0.9 items-center justify-start sm:flex-none">
           <img
             src={logo}
             alt="Minecraft Logo"
             className={`h-10 w-10 ${statusClasses}`}
           />
         </div>
-        <div className="flex-4 sm:flex-none">
+        <div className="flex-4 ml-1 sm:flex-none">
           <p className="flex items-center gap-2 text-lg font-bold">
             {worldName}{" "}
             <div className="flex items-center">

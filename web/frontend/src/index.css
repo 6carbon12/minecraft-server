@@ -15,4 +15,5 @@
 body {
   background-color: var(--color-tokyo-bg);
   color: var(--color-tokyo-fg);
+  font-family: 'JetBrains Mono', monospace;
 }

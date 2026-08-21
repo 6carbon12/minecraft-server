@@ -33,7 +33,7 @@ export default function Logs() {
   return (
     <div className="border-tokyo-border bg-tokyo-surface flex flex-1 w-full max-w-480 flex-col overflow-hidden rounded-md border font-mono text-sm">
       {/* Scrollable Log Container */}
-      <div className="text-tokyo-fg text-xs h-full space-y-1 overflow-y-auto p-2">
+      <div className="text-tokyo-fg text-xs h-full space-y-1 overflow-y-auto p-1">
         {logs.toReversed().map((log) => {
           const dateStr = log.time.substring(0, 10);
           const timeStr = log.time.substring(11, 19);
@@ -41,7 +41,7 @@ export default function Logs() {
           return (
             <div
               key={log.id}
-              className="flex gap-1 rounded px-2 py-1 transition-colors"
+              className="flex gap-2 rounded sm:px-2 sm:py-1 px-1 py-0.5 transition-colors"
             >
               <span className="shrink-0 text-[#565f89] mr-1">
                 <span className="hidden sm:inline">{dateStr}</span>
