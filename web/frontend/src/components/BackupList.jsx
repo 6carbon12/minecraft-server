@@ -1,3 +1,6 @@
+import RestoreIcon from '../assets/restore.svg?react'
+import DeleteIcon from '../assets/delete.svg?react'
+
 function formatBytes(bytes) {
   if (bytes === 0) return "0 B";
   const K = 1024;
@@ -76,11 +79,11 @@ export default function BackupList({backupName, setBackupName, backups, createBa
                     </td>
                     <td className="w-36 px-6 py-4">
                       <div className="flex h-full justify-center gap-2">
-                        <button className="bg-tokyo-accent h-10 w-10 rounded-sm" onClick={() => restoreBackup(backup.name)}>
-                          R
+                        <button className="bg-tokyo-accent h-10 w-10 rounded-sm flex items-center justify-center" onClick={() => restoreBackup(backup.name)}>
+                          <RestoreIcon height="24" width="24" />
                         </button>
-                        <button className="bg-tokyo-error h-10 w-10 rounded-sm" onClick={() => deleteBackup(backup.name)}>
-                          D
+                        <button className="bg-tokyo-error text-amber-50 h-10 w-10 rounded-sm flex items-center justify-center" onClick={() => deleteBackup(backup.name)}>
+                          <DeleteIcon height="24" width="24" fill="#57101D"/>
                         </button>
                       </div>
                     </td>

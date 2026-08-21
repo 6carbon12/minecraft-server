@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
-import startStop from "../assets/start-stop.svg";
-import restart from "../assets/restart.svg";
+import StartStopIcon from "../assets/start-stop.svg?react";
+import RestartIcon from "../assets/restart.svg?react";
 import { useEffect, useState } from "react";
 
 async function getServerStatus() {
@@ -127,13 +127,13 @@ export default function Status() {
           className={`bg-tokyo-accent rounded-md border p-2 ${powerButtonClasses}`}
           onClick={toggleServer}
         >
-          <img src={startStop} alt="Start/Stop" className="h-6" />
+        <StartStopIcon height="24" width="24" fill={serverState == "online" ? "#57101D" : "#3F522A"} ></StartStopIcon>
         </button>
         <button
           className="bg-tokyo-accent border-tokyo-border rounded-md border p-2"
           onClick={restartServer}
         >
-          <img src={restart} alt="Restart" className="h-6" />
+        <RestartIcon height="24" width="24" ></RestartIcon>
         </button>
       </div>
     </div>
