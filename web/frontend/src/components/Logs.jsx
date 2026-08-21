@@ -17,7 +17,6 @@ export default function Logs() {
   useEffect(() => {
     const loadLogs = async () => {
       const logs = await getLogs();
-      console.log(logs);
       setLogs(logs);
     };
 

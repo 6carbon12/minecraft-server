@@ -8,7 +8,6 @@ async function getBackups() {
   }
 
   const resJson = await res.json();
-  console.log(resJson);
   return resJson;
 }
 

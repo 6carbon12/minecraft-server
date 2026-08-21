@@ -15,7 +15,6 @@ function Admin() {
       setHistory((prev) => [
         ...prev,
         {
-          id: crypto.randomUUID(),
           type: "input",
           level: "INFO",
           message: ``,
@@ -26,7 +25,7 @@ function Admin() {
 
     setHistory((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), type: "input", message: command },
+      { type: "input", message: command },
     ]);
 
     if (command.toLowerCase() === "clear") {
@@ -48,7 +47,6 @@ function Admin() {
       setHistory((prev) => [
         ...prev,
         {
-          id: crypto.randomUUID(),
           type: "output",
           level: "ERROR",
           message: `Error: Failed to execute command.`,
