@@ -11,6 +11,8 @@ services:
       - "19133:19133/udp"
     volumes:
       - ./server/data:/minecraft
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
   webui:
     build: ./web
     user: "1001:1001"
@@ -32,4 +34,6 @@ services:
       - ./scripts:/app/scripts
       - ./backups:/app/backups
       - ./server/data/worlds:/app/worlds
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     restart: unless-stopped
