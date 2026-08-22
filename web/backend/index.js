@@ -24,6 +24,7 @@ app.post('/api/login', login);
 
 // AUTHENTICATED
 app.use('/api', authenticateToken);
+app.use('/api/me', (_, res) => res.sendStatus(200)); // Just a route to check if user is already authenticated
 
 // BACKUP
 app.get('/api/backups', listBackups);
