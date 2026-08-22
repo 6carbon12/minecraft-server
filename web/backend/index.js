@@ -46,6 +46,9 @@ app.post('/api/minecraft/command', runCommand);
 app.get('/api/minecraft/logs', getLogs);
 app.get('/api/minecraft/worldName', getWorldName);
 
+app.get('*', (_, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
 
 const HOST = '0.0.0.0';
 const server = app.listen(PORT, HOST, () => {
