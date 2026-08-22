@@ -1,4 +1,4 @@
-import logo from "../assets/logo.png";
+import worldLogo from "../assets/logo-main.png";
 import StartStopIcon from "../assets/start-stop.svg?react";
 import RestartIcon from "../assets/restart.svg?react";
 import { useEffect, useState } from "react";
@@ -108,13 +108,9 @@ export default function Status() {
   return (
     <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row items-center justify-between gap-1 rounded-md border px-2 py-2 sm:px-4 sm:py-3">
       <div className="flex flex-3/4 flex-row items-center gap-1">
-        <div className="flex flex-0.9 items-center justify-start sm:flex-none">
-          <img
-            src={logo}
-            alt="Minecraft Logo"
-            className={`h-10 w-10 ${statusClasses}`}
-          />
-        </div>
+            <div className="text-tokyo-accent flex h-10 w-10 items-center justify-center rounded-lg p-1 font-bold">
+              <img src={worldLogo} className={statusClasses} alt="A" />
+            </div>
         <div className="flex-4 ml-1 sm:flex-none">
           <p className="flex items-center gap-2 text-lg font-bold">
             {worldName}{" "}
