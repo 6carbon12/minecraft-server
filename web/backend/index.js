@@ -5,7 +5,7 @@ import { authenticateToken, login } from './src/auth.js';
 import { listBackups, createBackup, deleteBackup } from './src/backup.js';
 import { restore, getLatestRestore } from './src/restore.js';
 import { getServerStatus, startServer, stopServer, restartServer } from './src/server.js';
-import { runCommand, getLogs, getWorldName } from './src/minecraft.js';
+import { runCommand, getLogs, streamLogs, getWorldName } from './src/minecraft.js';
 import { __dirname, PORT } from './src/constants.js'
 
 const app = express();
@@ -44,6 +44,7 @@ app.get('/api/server/restart', restartServer);
 // MINECRAFT
 app.post('/api/minecraft/command', runCommand);
 app.get('/api/minecraft/logs', getLogs);
+app.get('/api/minecraft/logs/stream', streamLogs);
 app.get('/api/minecraft/worldName', getWorldName);
 
 app.get('*', (_, res) => {

@@ -1,9 +1,10 @@
 import { SCRIPT_DIR, WORLD_DIR } from './constants.js';
-import { execFile } from 'child_process';
+import { execFile, spawn } from 'child_process';
 import path from 'path';
 import fs from "fs/promises"
 import { promisify } from 'util';
 import { randomUUID } from 'crypto';
+import { createInterface } from 'readline';
 
 const processLogs = (logs) => {
   const lines = logs.split('\n');
@@ -80,13 +81,32 @@ export const getLogs = async (req, res) => {
 
     const processedLogs = processLogs(logs);
 
-    res.status(200).json( processedLogs );
+    res.status(200).json(processedLogs);
   } catch (error) {
     console.error("Failed to execute log command: ", error);
     res.status(500).json({ error: error.message })
   }
 
 };
+
+const logsProc = spawn(path.join(SCRIPT_DIR, 'serverctl.sh'), ["logs-follow"]);
+const logStream = createInterface({ input: logsProc.stdout });
+
+export const streamLogs = async (_, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+
+  logStream.on('line', (line) => {
+    const processedLogs = processLogs(line);
+    if (processedLogs.length === 0) return;
+
+    const response = "event: log\n" + `data: ${JSON.stringify(processedLogs[0])}\n\n`;
+    res.write(response);
+  })
+}
 
 export const getWorldName = async (_, res) => {
   const levelnameFile = path.join(WORLD_DIR, 'main-world/levelname.txt');

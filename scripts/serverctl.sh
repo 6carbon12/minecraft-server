@@ -26,6 +26,10 @@ while [[ $# -gt 0 ]]; do
       docker logs ${CONTAINER_NAME}
       shift
       ;;
+    logs-follow)
+      docker logs -f ${CONTAINER_NAME}
+      shift
+      ;;
     *)
       shift
       ;;
