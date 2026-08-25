@@ -108,13 +108,13 @@ export default function Status() {
   return (
     <div className="bg-tokyo-surface border-tokyo-border flex h-fit w-full max-w-480 flex-row items-center justify-between gap-1 rounded-md border px-2 py-2 sm:px-4 sm:py-3">
       <div className="flex flex-3/4 flex-row items-center gap-1">
-            <div className="text-tokyo-accent flex h-10 w-10 items-center justify-center rounded-lg p-1 font-bold">
-              <img src={worldLogo} className={statusClasses} alt="A" />
-            </div>
-        <div className="flex-4 ml-1 sm:flex-none">
-          <p className="flex items-center gap-2 text-lg font-bold">
-            {worldName}{" "}
-            <div className="flex items-center">
+        <div className="text-tokyo-accent flex h-10 w-10 items-center justify-center rounded-lg p-1 font-bold">
+          <img src={worldLogo} className={statusClasses} alt="A" />
+        </div>
+        <div className="ml-1 flex-4 sm:flex-none">
+          <div className="flex items-center">
+            <p className="flex items-center gap-2 text-lg font-bold">
+              {worldName}{" "}
               <span
                 className={
                   "animate-pulse " +
@@ -139,8 +139,8 @@ export default function Status() {
               >
                 {serverState}
               </span>
-            </div>
-          </p>
+            </p>
+          </div>
           <p className="text-tokyo-border text-xs text-wrap wrap-anywhere">
             <span className="hidden sm:inline">Last Resored: </span>
             {lastRestoredBackup.replace(".tar.gz", "")}
