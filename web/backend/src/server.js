@@ -1,6 +1,7 @@
 import { SCRIPT_DIR } from "./constants.js"
 import path from 'path';
 import { execFile } from 'child_process';
+import { getCpuUtilization, getMemUtilization } from "./utils.js";
 
 const fetchServerStatus = () => {
   return new Promise((resolve) => {
@@ -68,3 +69,38 @@ export const restartServer = (_, res) => {
     res.status(200).json({ message: "Server Restarted." });
   })
 };
+
+const clients = new Set();
+
+setInterval(async () => {
+  if (clients.size === 0) return;
+
+  try {
+    const [cpu, mem] = await Promise.all([
+      getCpuUtilization(),
+      getMemUtilization(),
+    ]);
+
+    const payload = `event: metrics\ndata: ${JSON.stringify({ cpu, mem })}\n\n`;
+
+    for (const res of clients)
+      res.write(payload);
+
+  } catch (err) {
+    console.error('Failed to collect/broadcast metrics:', err);
+  }
+}, 2000);
+
+export const streamMetrics = async (req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+  res.flushHeaders?.();
+  clients.add(res);
+
+  req.on('close', () => {
+    clients.delete(res);
+  });
+}
