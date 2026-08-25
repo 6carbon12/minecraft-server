@@ -118,6 +118,6 @@ echo "Making backup..."
 tar -czf "$BACKUP_DIR/$BACKUP_FILENAME" -C "$STAGE_DIR" "$WORLD_NAME"
 
 echo "Cleaning up old backups..."
-find "${BACKUP_DIR:?}" -type f -name "*.tar.gz" -mtime +21 -delete
+find "${BACKUP_DIR:?}" -type f -name "*.tar.gz" -mtime +3 -delete
 
 echo "Backup complete."
