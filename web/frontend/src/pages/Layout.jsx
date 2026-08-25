@@ -26,7 +26,7 @@ export default function Layout({ onLogout }) {
 
   return (
     <div className="bg-tokyo-bg flex h-svh flex-col">
-      <nav className="border-tokyo-border bg-tokyo-surface flex flex-col items-center border-b px-4 py-4 transition-all sm:px-8">
+      <nav className="border-tokyo-border bg-tokyo-surface flex flex-col items-center border-b px-4 py-4 transition-all sm:px-8 z-100">
         <div className="flex w-full max-w-480 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
